@@ -52,7 +52,7 @@
     {
         "Name": "Compressed Files",
         "Extensions": "7z,gz,rar,bz2,,xz,zip,zipx",
-        "Folder": "null"
+        "Folder": "Null"
     },
     {
         "Name": "Disk Images",

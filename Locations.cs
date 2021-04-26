@@ -3,9 +3,9 @@ namespace QCP
 {
     public struct Locations
     {
-        private string StartPath { get; set; }
+        private string StartPath { get; }
 
-        private string EndPath { get; set; }
+        private string EndPath { get; }
 
         public Locations(string location, string destination)
         {
