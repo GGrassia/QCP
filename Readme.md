@@ -24,25 +24,59 @@ The original phrase obviously hints at a room, not a folder, and "porcile" means
 Because I find real time sorting unproductive. If I've downloaded something, the first place I'll look for is the Downloads folder.
 Having to think what kind of file I have downloaded and then search for the corresponding folder means to rewire the brain, why do it when you can just cleanup each time you open up your computer?
 
-## How to use QCP
+## How to use QCP, for everyone
 
-1. First and foremost, edit the default folder of the "startup.json" file in the json folder to the path of the folder you want to tidy up.
+1. Download the .zip for your OS of choice.
 
->Nothing will work otherwise!
+2. Unzip the downloaded file in a place you will remember, specially if you are on OSX or any Linux distro.
 
-2. Run QCP!
+> Json files are a kind of text file which is easy to read both for you and the computer.
 
-### For lazy people (I feel you guys)
+4. Run QCP! Next section descrives OS specific course of action.
 
-- You could skip editing the startup json, but it would mean you have to press some buttons, and insert a path manually, you don't want that, do you?
+> Warning, if you have set nothing up and try to use defaults it will crash.
 
-- In the startup json edit to "true" both the silent and/or startup (only on W10 for the time being) fields.
+### On Windows
 
-- Done! In the path given to the "startup.json" you'll find some new folders with the files neatly divided between them based on the file type. Keep in mind there are default categories for the most used file types, every other less used file will be in a "Misc" folder.
+Just running QCP.exe and saying "run anyway" to windows should be enough.
+
+### On Linux
+
+Navigate to the QCP folder and type `./QCP`
+
+### On OSX
+
+***Sigh*** Apple forces you to a really tiring game of launch, open anyway (from gatekeeper), open.
+
+> I don't like it, but Apple has this protection method... If the project gets a lot of interest I might consider buying an apple certified developer stuff to avoid all this. Every donation will go towards that specific goal until completed.
+
+## For lazy people (I feel you guys)
+
+- In the jsons folder inside the QCP folder there is a file called "startup.json", open it with a text editor.
+
+- ***You could skip editing the startup json, but it would mean you have to press some buttons, and insert a path manually EVERY TIME, you don't want that, do you?*** Well then, in the "DefaultFolder" field there should be some text, delete it and put the path of the folder you want to keep tidy.
+
+> Since I myself also had a little trouble with finding the path, on OSX you can copy the path from the Finder, just select the folder and then click on "copy xyz as Pathname" from the Finder's edit menu on the topbar. You can paste it later in the terminal with cmd+V. You're welcome!
+
+- In the "startup.json" edit to "true" the silent and/or startup (only on W10 for the time being) fields.
+
+- Done! After launching QCP, in the path given to the "startup.json" you'll find some new folders with the files neatly divided between them based on the file type. Keep in mind there are default categories for the most used file types, every other less used file will be in a "Misc" folder.
 
 ### For configuration junkies
 
-I'll get to it... Meanwhile if you read the settings.json file you might get an idea of how it works...
+All right. You want to know stuff eh?
+Well, basically it's all in the settings.json file. (It will be defaultSettings.json in the folder).
+
+First and foremost, backup the default file, in case you break something.
+
+- The settings are divided in blocks which hold the information QCP needs to work:
+
+1. "Name": which is the name of the generic folder QCP will create based on that file type group, also serves as a quick way of knowing what grouping are you looking at.
+
+2. "Extensions": these are the extensions linked to the filetypes, divided by commas. If you want to move, add or remove an extension make sure you don't leave double commas or spaces in the file. If you want pdfs with pictures and not text documents, editing this file you can.
+You can add custom filetype groups or remove some, this is where you can fully configure the software.
+
+3. "Folder": here you can put the custom path for a filetype group. QCP won't make a new folder if you have given it a valid custom path (checks if the folder exists to know it), but will just move the files there.
 
 ## How to install
 
@@ -50,36 +84,28 @@ I'll get to it... Meanwhile if you read the settings.json file you might get an 
 
 Clone the repo and compile from source. Only thing needed is the .NET 5.0 SDK.
 
-### W10
+### Downloading
 
-Unzip in a folder you will remember, done.
-
-### MacOS
-
-Move QCP.app into the Applications folder, done.
-
-### Linux
-
-Welp, I'm an ass. QCP! was developed on linux, yet I haven't done/tested a release for it.
-
-.deb, .rpm and an AUR script are expected to hit release at some point, but I have no idea when I'll get to it.
+Choose the release zip corresponding to your OS, unzip somewhere you will remember.
 
 ## Future features
 
-1. Automatic start at login on Mac OSX and Linux (Systemd only, if you are not using it you're perfectly capable of setting it up yourself, am I right?)
+1. Automatic start at login on Mac OSX and Linux.
 
-2. No idea, so requests and ideas are more than welcome!
+2. MacOSX Certified developer signature, just to bypass the Apple BS on running the app.
+
+3. No idea, so requests and ideas are more than welcome!
 
 ## Requests
 
->Do you have ideas for new features or have you found bugs/nonsense in the code? Pull requests and ideas, as already said, are highly appreciated!
+> Do you have ideas for new features or have you found bugs/nonsense in the code? Pull requests and ideas, as already said, are highly appreciated!
 
 ## Big thank you to
 
 ### The senpai
 
-Testo @scarfacetheduke, who got me into coding and C#.
+@scarfacetheduke, who got me into coding and C#.
 
 ### The betatesters
 
-"ILMASTAH" and Dario who endured my tiring messages and proud boastings of broken code.
+"ILMASTAH" and Dario, friends who endured my tiring messages and proud boastings of broken code.
