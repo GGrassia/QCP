@@ -1,0 +1,67 @@
+[
+    {
+        "Name": "Text Documents",
+        "Extensions": "docx,doc,odt,pdf,rtf,tex,txt,wpd,log,msg,pages",
+        "Folder": "Null"
+    },
+    {
+        "Name": "Audio",
+        "Extensions": "aif,cda,ape,mid,midi,mp3,mpa,ogg,wav,wma,wpl,m4a",
+        "Folder": "Null"
+    },
+    {
+        "Name": "Data Files",
+        "Extensions": "csv,dat,ged,key,keychain,sdf,tar,vcf,xml",
+        "Folder": "Null"
+    },
+    {
+        "Name": "Video",
+        "Extensions": "3gp,asf,avi,flv,m4v,mov,mp4,mpg,rm,srt,swf,vob,wmv,h264,h265",
+        "Folder": "Null"
+    },
+    {
+        "Name": "Images (raster)",
+        "Extensions": "bmp,dds,gif,heic,jpg,jpeg,png,psd,pspimage,tga,thm,tif,tiff,yuv",
+        "Folder": "Null"
+    },
+    {
+        "Name": "Images (vector)",
+        "Extensions": "ai,eps,svg",
+        "Folder": "Null"
+    },
+    {
+        "Name": "Spreadsheets",
+        "Extensions": "xlr,xls,xlsx,ods",
+        "Folder": "Null"
+    },
+    {
+        "Name": "Executables",
+        "Extensions": "apk,app,bat,exe,jar,wsf,msi,sh",
+        "Folder": "Null"
+    },
+    {
+        "Name": "System Files",
+        "Extensions": "cab,cpl,dll,drv,ico,lnk,sys",
+        "Folder": "Null"
+    },
+    {
+        "Name": "Configuration Files",
+        "Extensions": "cfg,ini",
+        "Folder": "Null"
+    },
+    {
+        "Name": "Compressed Files",
+        "Extensions": "7z,gz,rar,bz2,,xz,zip,zipx",
+        "Folder": "null"
+    },
+    {
+        "Name": "Disk Images",
+        "Extensions": "dmg,iso,mdf",
+        "Folder": "Null"
+    },
+    {
+        "Name": "Presentations",
+        "Extensions": "key,odp,pps,ppt,pptx",
+        "Folder": "Null"
+    }
+]
