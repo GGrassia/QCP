@@ -46,7 +46,7 @@ Navigate to the QCP folder and type `./QCP`
 
 ### On OSX
 
-***Sigh*** Apple forces you to a really tiring game of launch, open anyway (from gatekeeper), open.
+***Sigh*** Apple forces you to a really tiring game of launch, open anyway (from gatekeeper), open again and again...
 
 > I don't like it, but Apple has this protection method... If the project gets a lot of interest I might consider buying an apple certified developer stuff to avoid all this. Every donation will go towards that specific goal until completed.
 
@@ -54,7 +54,8 @@ Navigate to the QCP folder and type `./QCP`
 
 - In the jsons folder inside the QCP folder there is a file called "startup.json", open it with a text editor.
 
-- ***You could skip editing the startup json, but it would mean you have to press some buttons, and insert a path manually EVERY TIME, you don't want that, do you?*** Well then, in the "DefaultFolder" field there should be some text, delete it and put the path of the folder you want to keep tidy.
+- ***You could skip editing the startup json, but it would mean you have to press some buttons, and insert a path manually EVERY TIME, you don't want that, do you?***
+Well then, in the "DefaultFolder" field there should be some text, delete it and put the path of the folder you want to keep tidy.
 
 > Since I myself also had a little trouble with finding the path, on OSX you can copy the path from the Finder, just select the folder and then click on "copy xyz as Pathname" from the Finder's edit menu on the topbar. You can paste it later in the terminal with cmd+V. You're welcome!
 
@@ -77,6 +78,10 @@ First and foremost, backup the default file, in case you break something.
 You can add custom filetype groups or remove some, this is where you can fully configure the software.
 
 3. "Folder": here you can put the custom path for a filetype group. QCP won't make a new folder if you have given it a valid custom path (checks if the folder exists to know it), but will just move the files there.
+
+- Now that you have configured how you want QCP to behave, follow the lazy people guide so it can run smoothly even for you.
+
+- Don't forget to put the customized (if you haven't simply modified the DefaultSettings.json file) file path inside the "startup.json" one!
 
 ## How to install
 
