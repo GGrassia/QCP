@@ -11,7 +11,7 @@ namespace QCP
             foreach (Correlation entry in folders)
             {
                 string[] extensions = entry.Extensions.Split(',');
-                if (entry.Folder == "Null" || entry.Folder == "null")
+                if (entry.Folder.ToLower() == "null")
                 {
                     foreach (var ext in extensions)
                     {

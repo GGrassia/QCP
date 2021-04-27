@@ -101,7 +101,7 @@ Well then, in the `"DefaultFolder"` field there should be some text, delete it a
 
 ![Easy guide](/images/QCP_OSX_Walkthrough.gif)
 
-- In the `startup.json` edit to `"true"` the silent and/or startup (only on W10 for the time being) fields.
+- In the `startup.json` edit to `"true"` the `SilentMode` and/or `LaunchAtLogin` (launch at login only works on W10 for the time being) fields.
 
 ![Startup json](/images/StartupJson.png)
 
@@ -132,6 +132,8 @@ Blocks have the following fields:
 If you want pdfs with pictures and not text documents, editing this file you can.
 
 3. `"Folder"`: here you can put the custom path for a filetype group. QCP won't make a new folder if you have given it a valid custom path (checks if the folder exists to know it), but will just move the files there.
+
+> If `Folder` is not "null" (case insensitive), QCP will make a custom folder with the `Folder` field as it's name, you have been warned!
 
  Now that you know how QCP behaves, customize it to taste then follow the lazy people guide so it can run smoothly even for you.
 
