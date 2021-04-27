@@ -16,7 +16,7 @@ namespace QCP
         // Sets a regkey to launch QCP at startup. Should only work on W10 for the time being (needs testing).
         public string LaunchAtLogin { get; set; }
 
-        // Settings json path read by the defaults, recomended for custom rules.
+        // Settings json file name read by the defaults, recomended for custom rules.
         public string SettingsJson { get; set; }
 
         // Default folder to be cleaned up. Also default parent folder for non custom filetype folders.
@@ -80,11 +80,11 @@ namespace QCP
         {
             if (usingDefaults == "y")
             {
-                return JsonSerializer.Deserialize<List<Correlation>>(File.ReadAllText(settings.SettingsJson));
+                return JsonSerializer.Deserialize<List<Correlation>>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "jsons", settings.SettingsJson)));
             }
             else
             {
-                return JsonSerializer.Deserialize<List<Correlation>>(File.ReadAllText("jsons/defaultSettings.json"));
+                return JsonSerializer.Deserialize<List<Correlation>>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "jsons", "defaultSettings.json")));
             }
         }
 
@@ -93,7 +93,7 @@ namespace QCP
         {
             if (usingDefaults == "y")
             {
-                return settings.DefaultFolder;
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "jsons", settings.DefaultFolder);
             }
             else
             {

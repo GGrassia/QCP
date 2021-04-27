@@ -1,6 +1,6 @@
 {
     "SilentMode": "false",
     "LaunchAtLogin": "false",
-    "SettingsJson": "jsons/defaultSettings.json",
+    "SettingsJson": "defaultSettings.json",
     "DefaultFolder": "CHANGE ME OR NOTHING WILL WORK"
 }

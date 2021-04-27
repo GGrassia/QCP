@@ -50,7 +50,7 @@ Having to think what kind of file I have downloaded and then search for the corr
 
 2. Unzip the downloaded file in a place you will remember, especially if you are on OSX or any Linux distro.
 
-3. Run QCP! by double clicking it.
+3. Run QCP! by double clicking it. There are minor differences in running, detailed below.
 
 > Warning, if you have set nothing up and try to use defaults it will crash.
 
@@ -70,7 +70,10 @@ If you can't open it by double clicking, open a terminal, drag it in and press e
 
 Just double click it but...  
 ***Sigh***  
-On first launch (unless you re-download QCP or something), you'll have to tell gatekeeper to open the libraries anyway (3 times!).  
+On first launch (unless you re-download QCP or something), you'll have to tell gatekeeper to open the libraries from the Security and Privacy settings.
+
+[If you want to see how it looks like, here's a guide for an older version of QCP](https://youtu.be/HoT2q4YbEkY)
+
 Here are two solutions to the problem. Challenge yourself! Or wait. I may make a gui version one day. Maybe. Possibly. It's classified.
 
 [Apple's guide to run unverified apps](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac)
@@ -83,8 +86,8 @@ Here are two solutions to the problem. Challenge yourself! Or wait. I may make a
 
   In the jsons folder inside the QCP folder there is a file called `startup.json`, open it with a text editor.
 
-  [alt text](/images/PublishFolder.png)
-  [alt text](/images/JsonsFolder.png)
+  ![Qcp folder](/images/PublishFolder.png "This is the QCP Folder")
+  ![Jsons folder](/images/JsonsFolder.png "This is the jsons folder")
 
   > Json files are a kind of text file, easy to read for you and the computer, nothing to be worried about!
 
@@ -92,15 +95,15 @@ Here are two solutions to the problem. Challenge yourself! Or wait. I may make a
 
 Well then, in the `"DefaultFolder"` field there should be some text, delete it and put the path of the folder you want to keep tidy.
 
-[alt text](/images/StartupJson.png)
+![Startup Json](/images/StartupJson.png)
 
 > Since I myself also had a little trouble with finding the path on OSX, you can copy the path from the Finder, just select the folder and then click on "copy xyz as Pathname" from the Finder's edit menu on the topbar. You can paste it later even in the terminal with cmd+V. You're welcome!
 
-[alt text](/images/QCP_OSX_Walkthrough.gif)
+![Easy guide](/images/QCP_OSX_Walkthrough.gif)
 
 - In the `startup.json` edit to `"true"` the silent and/or startup (only on W10 for the time being) fields.
 
-[alt text](/images/StartupJson.png)
+![Startup json](/images/StartupJson.png)
 
   **Done**!
 
@@ -119,7 +122,7 @@ Backup the default file, in case you break something.
 
 - The settings are divided in blocks which hold the information QCP needs to work, you can add or remove blocks as you please, just stick to the syntax.
 
-[alt text](images/SettingsJson.png)
+![alt text](images/SettingsJson.png)
 
 Blocks have the following fields:
 
@@ -132,9 +135,9 @@ If you want pdfs with pictures and not text documents, editing this file you can
 
  Now that you know how QCP behaves, customize it to taste then follow the lazy people guide so it can run smoothly even for you.
 
- Don't forget to put the customized (if you haven't simply modified the `defaultSettings.json` file) settings file path inside the `startup.json` one!
+ Don't forget to put the customized (if you haven't simply modified the `defaultSettings.json` file) settings file name inside the `startup.json` one otherwise you won't have your custom settings!
 
-[alt text](/images/StartupJson.png)
+![alt text](/images/StartupJson.png)
 
 ## How to install
 
