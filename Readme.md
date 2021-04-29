@@ -18,6 +18,7 @@ The original phrase obviously hints at a room, not a folder, and "porcile" means
   - [How to install](#how-to-install)
     - [Compiling](#compiling)
     - [Downloading](#downloading)
+  - [How to run at startup](#how-to-run-at-startup)
   - [Future features](#future-features)
   - [Requests](#requests)
   - [Big thank you to](#big-thank-you-to)
@@ -28,7 +29,11 @@ The original phrase obviously hints at a room, not a folder, and "porcile" means
 
 - **Sort files based on extension**
 
-> Since both Windows and OSX use extensions to know how to open a file, I figured it would be simpler to use the same criteria to sort the files.
+> Since both Windows and OSX use extensions to know how to open a file, I figured it would be simpler to use the same criterion to sort the files.
+
+- **Rename moved file if a file with the same name is already present**
+
+> Because overwriting without prompts is BAD.
 
 - **Json based configuration**
 
@@ -46,9 +51,9 @@ Having to think what kind of file I have downloaded and then search for the corr
 
 ## How to use QCP, for everyone
 
-1. Download the .zip for your OS of choice. (Or compile it!)
+1. Download the .zip for your OS of choice. (Or compile it!) [Here's the releases page](https://github.com/GGrassia/QCP/releases/tag/v1.0)
 
-2. Unzip the downloaded file in a place you will remember, especially if you are on OSX or any Linux distro.
+2. Unzip the downloaded file in a place you will remember.
 
 3. Run QCP! by double clicking it. There are minor differences in running, detailed below.
 
@@ -69,16 +74,16 @@ If you can't open it by double clicking, open a terminal, drag it in and press e
 ### On OSX
 
 Just double click it but...  
-***Sigh***  
-On first launch (unless you re-download QCP or something), you'll have to tell gatekeeper to open the libraries from the Security and Privacy settings.
+***Sigh*** If you are on Catalina or later...  
+On first launch (unless you re-download QCP or something), you'll have to tell gatekeeper to open three libraries from the Security and Privacy settings.
 
 [If you want to see how it looks like, here's a guide for an older version of QCP](https://youtu.be/HoT2q4YbEkY)
 
-Here are two solutions to the problem. Challenge yourself! Or wait. I may make a gui version one day. Maybe. Possibly. It's classified.
+Here's a simple solution to the problem.
 
-[Apple's guide to run unverified apps](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac)
+- Before running QCP, go to your `System Preferences` => `Security & Privacy` and open the `Privacy` tab. Now scroll down to the `Developer Tools` option and add the terminal to that window. Select the flag and open QCP, now you can run it without scary prompts. You can also take out the flag now, so prompts for other apps will open.
 
-[The unofficial (and a little more dangerous) way of doing it](https://www.imore.com/how-open-apps-anywhere-macos-catalina-and-mojave)
+![DevTools](images/QCP_nohassle.png)
 
 > I don't like it, but Apple has this ~~bullshit~~ protection method... If the project gets a lot of interest I might consider buying an apple certified developer stuff to avoid all this. Any eventual donation will go towards that specific goal until completed.
 
@@ -109,7 +114,13 @@ Well then, in the `"DefaultFolder"` field there should be some text, delete it a
 
 > After launching QCP, in the path given to the `startup.json` you'll find some new folders with the files neatly divided between them based on the file type. Keep in mind there are default categories for the most used file types, every other less used file will be in a `"Misc"` folder.
 
-// Before and after picture
+![Before](images/QCP_Before.png)
+
+> Before...
+
+![After](images/QCP_After.png)
+
+> And After!
 
 ## Configuration for advanced users or config-junkies
 
@@ -151,6 +162,16 @@ Clone the repo and compile from source. Only thing needed is the .NET 5.0 SDK.
 
 Choose the release zip corresponding to your OS, unzip somewhere you will remember.
 
+## How to run at startup
+
+If you are on Windows 10, it's easier, for now. Just change to `true` the `LaunchAtLogin` field inside the `startup.json`. Windows will tell you it's trying to run when you log in, just say yes.  
+
+On OSX, there are `startup items` in the `Users and Groups` page of `System Preferences`, just add QCP there (until I code it to be automatic as on Windows).
+
+![OSX Login](images/QCP_OSX_Login.png)
+
+On Linux... It depends on your distro... So... Uhm... Refer to your distro's documentation... or look here [this is a guide](https://www.howtogeek.com/687970/how-to-run-a-linux-program-at-startup-with-systemd/)
+
 ## Future features
 
 1. Automatic start at login on Mac OSX and Linux.
@@ -167,7 +188,7 @@ Choose the release zip corresponding to your OS, unzip somewhere you will rememb
 
 ### The senpai
 
-@scarfacetheduke, who got me into coding and C#. Also, HUGE HELP and guide in developing QCP and all my C# software.
+@davidetestoni, who got me into coding and C#. Also, HUGE HELP and guide in developing QCP and all my C# software.
 
 ### The betatesters
 
