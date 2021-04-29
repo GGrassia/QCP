@@ -11,7 +11,7 @@ namespace QCP
     public struct Startup
     {
         // Silentmode assumes you want to use defaults and prevents info or communication unless exceptions arise.
-        public string Silentmode { get; set; }
+        public string SilentMode { get; set; }
 
         // Sets a regkey to launch QCP at startup. Should only work on W10 for the time being (needs testing).
         public string LaunchAtLogin { get; set; }
@@ -25,20 +25,20 @@ namespace QCP
         // Check for silent mode and startup, then asks if you want to load defaults when silent mode is off.
         public static string UseDefaults(Startup x)
         {
-            if (x.Silentmode != "true")
+            if (x.SilentMode.ToLower() != "true")
             {
                 Console.WriteLine("Silent mode is not active, if you want me to run without needing inputs, set the field to 'true' in the startup json, press enter to continue");
                 Console.ReadLine();
             }
 
-            if (x.LaunchAtLogin != "true" && x.Silentmode != "true")
+            if (x.LaunchAtLogin.ToLower() != "true" && x.SilentMode.ToLower() != "true")
             {
                 Console.WriteLine("Launch at login is disabled. If you want it to be enabled, set the field to 'true' in the startup json, it will be active from the next QCP execution. Press enter to continue");
                 Console.ReadLine();
             }
 
             string defaults;
-            if (x.Silentmode == "true")
+            if (x.SilentMode.ToLower() == "true")
             {
                 return "y";
             }
@@ -67,7 +67,7 @@ namespace QCP
             RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
             if (x.LaunchAtLogin == "true")
             {
-                rk.SetValue("QCP", System.Reflection.Assembly.GetExecutingAssembly().Location);
+                rk.SetValue("QCP", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "QCP.exe"));
             }
             else
             {

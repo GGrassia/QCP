@@ -43,7 +43,7 @@
 
             // Check if run at login settings are changed and if silent mode is off give feedback.
             Startup.RunAtLogin(startup);
-            if (startup.Silentmode != "true")
+            if (startup.SilentMode != "true")
             {
                 Console.WriteLine("All done, see you next time. Press enter to exit.");
                 Console.ReadLine();
@@ -55,9 +55,25 @@
         {
             foreach (string fileLocation in Directory.EnumerateFiles(source))
             {
-                string destination = LocationGenerator(source, fileLocation);
-                string fileName = Path.GetFileName(fileLocation);
-                Locations fileToMove = new Locations(fileLocation, Path.Combine(destination, fileName));
+                string destinationFolder = LocationGenerator(source, fileLocation);
+                string fileName = Path.GetFileNameWithoutExtension(fileLocation);
+                string fileExtension = Path.GetExtension(fileLocation);
+                Locations fileToMove;
+                if (File.Exists(Path.Combine(destinationFolder, fileName)))
+                {
+                    int i;
+                    for (i = 1; File.Exists(Path.Combine(destinationFolder, fileName + i + fileExtension)); i++)
+                    {
+
+                    }
+
+                    fileToMove = new Locations(fileLocation, Path.Combine(destinationFolder, fileName + i + fileExtension));
+                }
+                else
+                {
+                    fileToMove = new Locations(fileLocation, Path.Combine(destinationFolder, fileName + fileExtension));
+                }
+
                 list.Add(fileToMove);
             }
         }
