@@ -74,9 +74,11 @@ If you can't open it by double clicking, open a terminal, drag it in and press e
 
 ### On OSX
 
-Just double click it but...  
-***Sigh*** If you are on Catalina or later...  
-On first launch (unless you re-download QCP or something), you'll have to tell gatekeeper to open three libraries from the Security and Privacy settings.
+***QCP IS MADE IN .NET 5.0, SO IT'S NOT COMPATIBLE WITH OSX 10.12 SIERRA AND BEFORE***
+
+Just double click (or right click and say open) it but...  
+***Sigh***  
+On first launch only (unless you re-download QCP or something), you'll have to open QCP a couple of times and tell the Mac (from the `System Preferences`=>`Security & Privacy`=>`General` tab) every time to open QCP and the libraries it's stopping.  
 
 [If you want to see how it looks like, here's a guide for an older version of QCP](https://youtu.be/HoT2q4YbEkY)
 
