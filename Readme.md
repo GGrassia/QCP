@@ -24,6 +24,7 @@ The original phrase obviously hints at a room, not a folder, and "porcile" means
   - [Big thank you to](#big-thank-you-to)
     - [The senpai](#the-senpai)
     - [The betatesters](#the-betatesters)
+  - [Donations](#donations)
 
 ## Features
 
@@ -193,3 +194,15 @@ On Linux... It depends on your distro... So... Uhm... Refer to your distro's doc
 ### The betatesters
 
 "ILMASTAH" and Dario, friends who endured my tiring messages and proud boastings of broken code.
+
+## Donations
+
+QCP comes absolutely free.  
+As a long time GNU/Linux user, free software has been a staple of my experience and I wanted to give something back, also I have a job, so I don't need the money.  
+That said, if you want to support me, or buy me a coffee (which I won't buy until I have bought the Apple Certification, unless you specifically tell me otherwise) here's a way to.
+
+<form action="https://www.paypal.com/donate" method="post" target="_top">
+<input type="hidden" name="hosted_button_id" value="52AGUY2SUK6NY" />
+<input type="image" src="https://www.paypalobjects.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+<img alt="" border="0" src="https://www.paypal.com/en_IT/i/scr/pixel.gif" width="1" height="1" />
+</form>
