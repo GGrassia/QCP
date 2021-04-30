@@ -161,7 +161,7 @@ Clone the repo and compile from source. Only thing needed is the .NET 5.0 SDK.
 
 ### Downloading
 
-Choose the release zip corresponding to your OS, unzip somewhere you will remember.
+Choose the release zip corresponding to your OS, unzip somewhere you will remember. [Here's the releases page](https://github.com/GGrassia/QCP/releases/tag/v1.0)
 
 ## How to run at startup
 
@@ -201,4 +201,4 @@ QCP comes absolutely free.
 As a long time GNU/Linux user, free software has been a staple of my experience and I wanted to give something back, also I have a job, so I don't need the money.  
 That said, if you want to support me, or buy me a coffee (which I won't buy until I have bought the Apple Certification, unless you specifically tell me otherwise) here's a way to.
 
-![PayPal Donate](https://www.paypal.com/donate?hosted_button_id=52AGUY2SUK6NY)
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate?hosted_button_id=52AGUY2SUK6NY)
