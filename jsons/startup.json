@@ -1,6 +1,10 @@
 {
-    "SilentMode": "false",
-    "LaunchAtLogin": "false",
+    "SilentMode": false,
+    "LaunchAtLogin": false,
     "SettingsJson": "defaultSettings.json",
-    "DefaultFolder": "CHANGE ME OR NOTHING WILL WORK"
+    "DefaultFolder": 
+    [
+        "/home/giulio/Downloads",
+        "/home/giulio/Documents"
+    ]
 }

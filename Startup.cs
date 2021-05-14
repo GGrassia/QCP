@@ -7,40 +7,36 @@ namespace QCP
     using System.Text.Json;
     using Microsoft.Win32;
 
-    // Struct managing startup options, also responsible of serializing the settings json. Instanced by deserializing startup json.
+    // Struct managing startup options, also responsible of serializing the settings json.
     public struct Startup
     {
-        // Silentmode assumes you want to use defaults and prevents info or communication unless exceptions arise.
-        public string SilentMode { get; set; }
+        public bool SilentMode { get; set; }
 
-        // Sets a regkey to launch QCP at startup. Should only work on W10 for the time being (needs testing).
-        public string LaunchAtLogin { get; set; }
+        public bool LaunchAtLogin { get; set; }
 
-        // Settings json file name read by the defaults, recomended for custom rules.
         public string SettingsJson { get; set; }
 
-        // Default folder to be cleaned up. Also default parent folder for non custom filetype folders.
-        public string DefaultFolder { get; set; }
+        // This will become an array of folders, directly from the json
+        public List<string> DefaultFolder { get; set; }
 
-        // Check for silent mode and startup, then asks if you want to load defaults when silent mode is off.
-        public static string UseDefaults(Startup x)
+        public static bool UseDefaults(Startup x)
         {
-            if (x.SilentMode.ToLower() != "true")
+            if (!x.SilentMode)
             {
                 Console.WriteLine("Silent mode is not active, if you want me to run without needing inputs, set the field to 'true' in the startup json, press enter to continue");
                 Console.ReadLine();
             }
 
-            if (x.LaunchAtLogin.ToLower() != "true" && x.SilentMode.ToLower() != "true")
+            if (!x.LaunchAtLogin && !x.SilentMode)
             {
                 Console.WriteLine("Launch at login is disabled. If you want it to be enabled, set the field to 'true' in the startup json, it will be active from the next QCP execution. Press enter to continue");
                 Console.ReadLine();
             }
 
             string defaults;
-            if (x.SilentMode.ToLower() == "true")
+            if (x.SilentMode)
             {
-                return "y";
+                return true;
             }
             else
             {
@@ -48,15 +44,14 @@ namespace QCP
                 defaults = Console.ReadLine().ToLower();
                 if (defaults == "y")
                 {
-                    return defaults;
+                    return true;
                 }
 
                 Console.WriteLine("Ok, using manual mode and default folder settings");
-                return "n";
+                return false;
             }
         }
 
-        // Sets automatic run at login for the current user.
         public static void RunAtLogin(Startup x)
         {
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -65,7 +60,7 @@ namespace QCP
             }
 
             RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            if (x.LaunchAtLogin == "true")
+            if (x.LaunchAtLogin)
             {
                 rk.SetValue("QCP", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "QCP.exe"));
             }
@@ -75,10 +70,10 @@ namespace QCP
             }
         }
 
-        // Deserializes the settings json, default or not
-        public static List<Correlation> LoadSettings(string usingDefaults, Startup settings)
+        // Remember, bools are your friends
+        public static List<Correlation> LoadSettings(bool usingDefaults, Startup settings)
         {
-            if (usingDefaults == "y")
+            if (usingDefaults)
             {
                 return JsonSerializer.Deserialize<List<Correlation>>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "jsons", settings.SettingsJson)));
             }
@@ -88,16 +83,20 @@ namespace QCP
             }
         }
 
-        // Sets the folder you want to clean up, default or custom
-        public static string SetDefaultFolder(string usingDefaults, Startup settings)
+        // KEEP IN MIND YOU NEED TO MAKE THIS FOREACHED
+        public static List<string> SetDefaultFolder(bool usingDefaults, Startup startup)
         {
-            if (usingDefaults == "y")
+            List<string> foldersToTidy = new();
+            if (usingDefaults)
             {
-                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "jsons", settings.DefaultFolder);
+                foreach (string x in startup.DefaultFolder)
+                {
+                    foldersToTidy.Add(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "jsons", x));
+                }
             }
             else
             {
-                Console.WriteLine("Ok, tell me the path of the folder you want to tidy up");
+                Console.WriteLine("Tell me the path of the folder you want to tidy up");
                 string source = Console.ReadLine();
                 bool dirExists = Directory.Exists(source);
                 while (!dirExists)
@@ -107,8 +106,10 @@ namespace QCP
                     dirExists = Directory.Exists(source);
                 }
 
-                return source;
+                foldersToTidy.Add(source);
             }
+
+            return foldersToTidy;
         }
     }
 }

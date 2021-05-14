@@ -14,21 +14,20 @@
         {
             // Creating a startup with the basic settings of the program and see if user wants to use defaults.
             Startup startup = JsonSerializer.Deserialize<Startup>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "jsons", "startup.json")));
-            string defaults = Startup.UseDefaults(startup);
+            bool defaults = Startup.UseDefaults(startup);
 
-            // Generates the ruleset for moving files.
+            // Folders is a wrong name. Find a new one
             List<Correlation> folders = Startup.LoadSettings(defaults, startup);
 
-            // Folder to be cleaned up.
-            string source = Startup.SetDefaultFolder(defaults, startup);
+            // This needs to be a list of source folders
+            List<string> source = Startup.SetDefaultFolder(defaults, startup);
 
-            // Dictionary of correlations between file extension and destination folder.
             dict = DictGen.GenerateDictionary(folders, dict);
 
-            // List of the files to move.
-            List<Locations> fileList = new List<Locations>();
+            // List of the files to move. Will contain files from all folders.
+            List<FileMover> fileList = new List<FileMover>();
 
-            // Populate the list with the locations then moves files
+            // Put a foreach and iter through the folder list
             try
             {
                 PopulateList(fileList, source);
@@ -38,63 +37,68 @@
                 Console.WriteLine($"I had a problem, please, send the error to the dev. Here's the error: {e}");
             }
 
-            // Move the files
-            Parallel.ForEach(fileList, i => Locations.TidyUp(i));
+            // Parallel.ForEach(fileList, i => i.TidyUp());
+            // Commented because of satisfying cleanup
+            foreach (FileMover i in fileList)
+            {
+                i.TidyUp();
+            }
 
-            // Check if run at login settings are changed and if silent mode is off give feedback.
             Startup.RunAtLogin(startup);
-            if (startup.SilentMode != "true")
+            if (!startup.SilentMode)
             {
                 Console.WriteLine("All done, see you next time. Press enter to exit.");
                 Console.ReadLine();
             }
         }
 
-        // Populate the list of files to be moved.
-        private static void PopulateList(List<Locations> list, string source)
+        private static void PopulateList(List<FileMover> list, List<string> source)
         {
-            foreach (string fileLocation in Directory.EnumerateFiles(source))
+            foreach (string folderWithFiles in source)
             {
-                string destinationFolder = LocationGenerator(source, fileLocation);
-                string fileName = Path.GetFileNameWithoutExtension(fileLocation);
-                string fileExtension = Path.GetExtension(fileLocation);
-                Locations fileToMove;
-                if (File.Exists(Path.Combine(destinationFolder, fileName)))
+                foreach (string fileLocation in Directory.EnumerateFiles(folderWithFiles))
                 {
-                    int i;
-                    for (i = 1; File.Exists(Path.Combine(destinationFolder, fileName + i + fileExtension)); i++)
+                    string destinationFolder = LocationGenerator(folderWithFiles, fileLocation);
+                    string fileName = Path.GetFileNameWithoutExtension(fileLocation);
+                    string fileExtension = Path.GetExtension(fileLocation);
+                    FileMover fileToMove;
+                    if (File.Exists(Path.Combine(destinationFolder, fileName)))
                     {
+                        int i = 1;
+                        while (File.Exists(Path.Combine(destinationFolder, fileName + i + fileExtension)))
+                        {
+                            i++;
+                        }
 
+                        fileToMove = new FileMover(fileLocation, Path.Combine(destinationFolder, fileName + i + fileExtension));
+                    }
+                    else
+                    {
+                        fileToMove = new FileMover(fileLocation, Path.Combine(destinationFolder, fileName + fileExtension));
                     }
 
-                    fileToMove = new Locations(fileLocation, Path.Combine(destinationFolder, fileName + i + fileExtension));
-                }
-                else
-                {
-                    fileToMove = new Locations(fileLocation, Path.Combine(destinationFolder, fileName + fileExtension));
-                }
-
-                list.Add(fileToMove);
+                    list.Add(fileToMove);
             }
         }
 
-        // Generate destination and create corresponding folder if not present. Returns custom folder if existing.
-        private static string LocationGenerator(string source, string fileName)
-        {
-            string extension = Path.GetExtension(fileName).Replace(".","");
-            var entry = dict.ContainsKey(extension) ? dict[extension] : "Misc";
-            string destination;
-            if (Directory.Exists(entry))
+            // Generate destination and create corresponding folder if not present. Returns custom folder if existing.
+            static string LocationGenerator(string sourceFolder, string fileName)
             {
-                destination = entry;
-            }
-            else
-            {
-                destination = Path.Combine(source, entry);
-                Directory.CreateDirectory(destination);
-            }
+                string extension = Path.GetExtension(fileName).Replace(".","");
+                var entry = dict.ContainsKey(extension) ? dict[extension] : "Misc";
+                string destination;
+                if (Directory.Exists(entry))
+                {
+                    destination = entry;
+                }
+                else
+                {
+                    destination = Path.Combine(sourceFolder, entry);
+                    Directory.CreateDirectory(destination);
+                }
 
-            return destination;
+                return destination;
+            }
         }
     }
 }
