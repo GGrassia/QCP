@@ -51,7 +51,7 @@ The original phrase obviously hints at a room, not a folder, and "porcile" means
 
 - **Optional one by one file tidying up**
   
-[Are you satisfied?](images/satisMode.gif)
+![Are you satisfied?](images/satisMode.gif)
 
 > Some people might find it satisfying, others want to see the program working, so there you go.
 
