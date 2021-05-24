@@ -16,8 +16,7 @@ namespace QCP
         // Move the files
         public void TidyUp()
         {
-            System.IO.File.Move(this.StartPath, this.EndPath);
-            Thread.Sleep(200);
+            System.IO.File.Move(StartPath, EndPath);
         }
     }
 }

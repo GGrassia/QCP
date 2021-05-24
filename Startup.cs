@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 namespace QCP
 {
     using System;
@@ -5,6 +6,7 @@ namespace QCP
     using System.IO;
     using System.Runtime.InteropServices;
     using System.Text.Json;
+    using Claunia.PropertyList;
     using Microsoft.Win32;
 
     // Struct managing startup options, also responsible of serializing the settings json.
@@ -14,9 +16,10 @@ namespace QCP
 
         public bool LaunchAtLogin { get; set; }
 
+        public bool SlowMode { get; set; }
+
         public string SettingsJson { get; set; }
 
-        // This will become an array of folders, directly from the json
         public List<string> DefaultFolder { get; set; }
 
         public static bool UseDefaults(Startup x)
@@ -54,23 +57,42 @@ namespace QCP
 
         public static void RunAtLogin(Startup x)
         {
-            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                return;
-            }
+            // if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            // {
+            //     RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            //     if (x.LaunchAtLogin)
+            //     {
+            //         rk.SetValue("QCP", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "QCP.exe"));
+            //     }
+            //     else
+            //     {
+            //         rk.DeleteValue("QCP", false);
+            //     }
+            // }
+            // else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            // {
+                string launchAgentsFolder = "/home/giulio/Downloads/QCP.plist";
+                string runFolder = AppDomain.CurrentDomain.BaseDirectory;
+                string plistPath = Path.Combine(runFolder, "QCP.plist");
 
-            RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            if (x.LaunchAtLogin)
-            {
-                rk.SetValue("QCP", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "QCP.exe"));
-            }
-            else
-            {
-                rk.DeleteValue("QCP", false);
-            }
+                if (x.LaunchAtLogin)
+                {
+                    if (File.Exists(launchAgentsFolder))
+                    {
+                        File.Delete(launchAgentsFolder);
+                    }
+
+                    NSDictionary root = new NSDictionary();
+                    NSString plistID = new NSString("QCP");
+                    NSString programPath = new NSString(Path.Combine(runFolder, "QCP", "QCP"));
+                    root.Add("Label", plistID);
+                    root.Add("Program", programPath);
+                    root.Add("RunAtLoad", true);
+                    PropertyListParser.SaveAsXml(root, new FileInfo(launchAgentsFolder));
+                }
+           // }
         }
 
-        // Remember, bools are your friends
         public static List<Correlation> LoadSettings(bool usingDefaults, Startup settings)
         {
             if (usingDefaults)
@@ -83,7 +105,6 @@ namespace QCP
             }
         }
 
-        // KEEP IN MIND YOU NEED TO MAKE THIS FOREACHED
         public static List<string> SetDefaultFolder(bool usingDefaults, Startup startup)
         {
             List<string> foldersToTidy = new();

@@ -1,6 +1,7 @@
 {
     "SilentMode": false,
-    "LaunchAtLogin": false,
+    "LaunchAtLogin": true,
+    "SlowMode": false,
     "SettingsJson": "defaultSettings.json",
     "DefaultFolder": 
     [

@@ -9,17 +9,16 @@ namespace QCP
         {
             foreach (Correlation entry in folders)
             {
-                string[] extensions = entry.Extensions.Split(',');
                 if (entry.Folder == null)
                 {
-                    foreach (var ext in extensions)
+                    foreach (var ext in entry.Extensions)
                     {
                         dict[ext] = entry.Name;
                     }
                 }
                 else
                 {
-                    foreach (var ext in extensions)
+                    foreach (var ext in entry.Extensions)
                     {
                         dict[ext] = entry.Folder;
                     }

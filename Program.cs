@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Text.Json;
+    using System.Threading;
     using System.Threading.Tasks;
 
     public static class Program
@@ -12,22 +13,19 @@
 
         public static void Main(string[] args)
         {
-            // Creating a startup with the basic settings of the program and see if user wants to use defaults.
+            // Creating a startup object with the basic settings of the program and see if user wants to use defaults.
             Startup startup = JsonSerializer.Deserialize<Startup>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "jsons", "startup.json")));
             bool defaults = Startup.UseDefaults(startup);
 
-            // Folders is a wrong name. Find a new one
-            List<Correlation> folders = Startup.LoadSettings(defaults, startup);
+            List<Correlation> startAndEndPaths = Startup.LoadSettings(defaults, startup);
 
-            // This needs to be a list of source folders
             List<string> source = Startup.SetDefaultFolder(defaults, startup);
 
-            dict = DictGen.GenerateDictionary(folders, dict);
+            dict = DictGen.GenerateDictionary(startAndEndPaths, dict);
 
-            // List of the files to move. Will contain files from all folders.
+            // List of the files to move. Made like this to easily implement progress bar
             List<FileMover> fileList = new List<FileMover>();
 
-            // Put a foreach and iter through the folder list
             try
             {
                 PopulateList(fileList, source);
@@ -37,11 +35,17 @@
                 Console.WriteLine($"I had a problem, please, send the error to the dev. Here's the error: {e}");
             }
 
-            // Parallel.ForEach(fileList, i => i.TidyUp());
-            // Commented because of satisfying cleanup
-            foreach (FileMover i in fileList)
+            if (startup.SlowMode)
             {
+                foreach (FileMover i in fileList)
+                {
                 i.TidyUp();
+                Thread.Sleep(200);
+                }
+            }
+            else
+            {
+                Parallel.ForEach(fileList, i => i.TidyUp());
             }
 
             Startup.RunAtLogin(startup);
@@ -62,7 +66,7 @@
                     string fileName = Path.GetFileNameWithoutExtension(fileLocation);
                     string fileExtension = Path.GetExtension(fileLocation);
                     FileMover fileToMove;
-                    if (File.Exists(Path.Combine(destinationFolder, fileName)))
+                    if (File.Exists(Path.Combine(destinationFolder, Path.GetFileName(fileLocation))))
                     {
                         int i = 1;
                         while (File.Exists(Path.Combine(destinationFolder, fileName + i + fileExtension)))
