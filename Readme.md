@@ -1,11 +1,16 @@
-# QCP!  - On startup folder organizing
+# QCP!  - Configurable folder organizer
+
+## Download
+
+[Download QCP for your OS from this link](https://github.com/GGrassia/QCP/releases)
 
 ## The name:_"Questa Cartella è un Porcile!"_
 
 Roughly translating to "This folder is a bloody mess!", QCP! gets its name from a common phrase yelled by Italian mothers when their offspring's room is... Not tidy.
 The original phrase obviously hints at a room, not a folder, and "porcile" means pigsty, I'll leave you to your own conclusions.
 
-- [QCP!  - On startup folder organizing](#qcp----on-startup-folder-organizing)
+- [QCP!  - Configurable folder organizer](#qcp----configurable-folder-organizer)
+  - [Download](#download)
   - [The name:_"Questa Cartella è un Porcile!"_](#the-namequesta-cartella-è-un-porcile)
   - [Features](#features)
     - [Why not a background running script?](#why-not-a-background-running-script)
@@ -43,6 +48,12 @@ The original phrase obviously hints at a room, not a folder, and "porcile" means
 - **Automatic folder creation based on file type**
 
 > Because sometimes, you need to be shown order to start thinking tidy.
+
+- **Optional one by one file tidying up**
+  
+[Are you satisfied?](images/satisMode.gif)
+
+> Some people might find it satisfying, others want to see the program working, so there you go.
 
 ### Why not a background running script?
 
@@ -101,7 +112,7 @@ Here's a simple solution to the problem.
 
 - ***You could skip editing the startup json, but it would mean you have to press some buttons, and insert a path manually EVERY TIME, you don't want that, do you?***
 
-Well then, in the `"DefaultFolder"` field there should be some text, delete it and put the path of the folder you want to keep tidy.
+Well then, in the `"DefaultFolder"` field there should be some text, delete it and put the path of the folder you want to keep tidy. Since version 1.1 you can add multiple folders to be tidied, just remember to separate the paths with a comma `","`.
 
 ![Startup Json](/images/StartupJson.png)
 
@@ -109,13 +120,14 @@ Well then, in the `"DefaultFolder"` field there should be some text, delete it a
 
 ![Easy guide](/images/QCP_OSX_Walkthrough.gif)
 
-- In the `startup.json` edit to `"true"` the `SilentMode` and/or `LaunchAtLogin` (launch at login only works on W10 for the time being) fields.
+- In the `startup.json` edit to `"true"` the `SilentMode` and/or `LaunchAtLogin` (not working on Linux, will work in next versions) fields.
+- QCP runs slow by default. If you want to speed it up set `SlowMode` to `false`.
 
 ![Startup json](/images/StartupJson.png)
 
   **Done**!
 
-> After launching QCP, in the path given to the `startup.json` you'll find some new folders with the files neatly divided between them based on the file type. Keep in mind there are default categories for the most used file types, every other less used file will be in a `"Misc"` folder.
+> After launching QCP, in the paths given to the `startup.json` you'll find some new folders with the files neatly divided between them based on the file type. Keep in mind there are default categories for the most used file types, every other less used file will be in a `"Misc"` folder.
 
 ![Before](images/QCP_Before.png)
 
@@ -142,12 +154,12 @@ Blocks have the following fields:
 
 1. `"Name"`: which is the name of the generic folder QCP will create based on that file type group, also serves as a quick way of knowing what grouping are you looking at.
 
-2. `"Extensions"`: these are the extensions linked to the filetypes, divided by commas. If you want to move, add or remove an extension, **make sure** you don't leave double commas or spaces in the file.  
+2. `"Extensions"`: these are the extensions linked to the filetypes. If you want to move, add or remove an extension, **make sure** you don't leave double commas or spaces in the file.  
 If you want pdfs with pictures and not text documents, editing this file you can.
 
 3. `"Folder"`: here you can put the custom path for a filetype group. QCP won't make a new folder if you have given it a valid custom path (checks if the folder exists to know it), but will just move the files there.
 
-> If `Folder` is not "null" (case insensitive), QCP will make a custom folder with the `Folder` field as it's name, you have been warned!
+> If `Folder` is not "null", QCP will make a custom folder with the `Folder` field as it's name, you have been warned!
 
  Now that you know how QCP behaves, customize it to taste then follow the lazy people guide so it can run smoothly even for you.
 
@@ -163,21 +175,17 @@ Clone the repo and compile from source. Only thing needed is the .NET 5.0 SDK.
 
 ### Downloading
 
-Choose the release zip corresponding to your OS, unzip somewhere you will remember. [Here's the releases page](https://github.com/GGrassia/QCP/releases/tag/v1.0)
+Choose the release zip corresponding to your OS, unzip somewhere you will remember. [Here's the releases page](https://github.com/GGrassia/QCP/releases)
 
 ## How to run at startup
 
-If you are on Windows 10, it's easier, for now. Just change to `true` the `LaunchAtLogin` field inside the `startup.json`. Windows will tell you it's trying to run when you log in, just say yes.  
-
-On OSX, there are `startup items` in the `Users and Groups` page of `System Preferences`, just add QCP there (until I code it to be automatic as on Windows).
-
-![OSX Login](images/QCP_OSX_Login.png)
+Change to `true` the `LaunchAtLogin` field inside the `startup.json`. Windows will tell you it's trying to run when you log in, just say yes.  
 
 On Linux... It depends on your distro... So... Uhm... Refer to your distro's documentation... or look here [this is a guide](https://www.howtogeek.com/687970/how-to-run-a-linux-program-at-startup-with-systemd/)
 
 ## Future features
 
-1. Automatic start at login on Mac OSX and Linux.
+1. Automatic start at login on Linux.
 
 2. MacOSX Certified developer signature, just to bypass the Apple BS on running the app.
 

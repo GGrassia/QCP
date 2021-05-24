@@ -1,4 +1,3 @@
-using System.Runtime.Serialization;
 namespace QCP
 {
     using System;
@@ -55,26 +54,25 @@ namespace QCP
             }
         }
 
+        // Maybe I should make a static class for this. It's a big method.
         public static void RunAtLogin(Startup x)
         {
-            // if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            // {
-            //     RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            //     if (x.LaunchAtLogin)
-            //     {
-            //         rk.SetValue("QCP", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "QCP.exe"));
-            //     }
-            //     else
-            //     {
-            //         rk.DeleteValue("QCP", false);
-            //     }
-            // }
-            // else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-            // {
-                string launchAgentsFolder = "/home/giulio/Downloads/QCP.plist";
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                if (x.LaunchAtLogin)
+                {
+                    rk.SetValue("QCP", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "QCP.exe"));
+                }
+                else
+                {
+                    rk.DeleteValue("QCP", false);
+                }
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                string launchAgentsFolder = "~/Library/LaunchAgents/QCP.plist";
                 string runFolder = AppDomain.CurrentDomain.BaseDirectory;
-                string plistPath = Path.Combine(runFolder, "QCP.plist");
-
                 if (x.LaunchAtLogin)
                 {
                     if (File.Exists(launchAgentsFolder))
@@ -90,7 +88,11 @@ namespace QCP
                     root.Add("RunAtLoad", true);
                     PropertyListParser.SaveAsXml(root, new FileInfo(launchAgentsFolder));
                 }
-           // }
+                else
+                {
+                    File.Delete(launchAgentsFolder);
+                }
+            }
         }
 
         public static List<Correlation> LoadSettings(bool usingDefaults, Startup settings)

@@ -1,11 +1,12 @@
 {
     "SilentMode": false,
-    "LaunchAtLogin": true,
-    "SlowMode": false,
+    "LaunchAtLogin": false,
+    "SlowMode": true,
     "SettingsJson": "defaultSettings.json",
     "DefaultFolder": 
     [
-        "/home/giulio/Downloads",
-        "/home/giulio/Documents"
+        "PUT A FOLDER PATH HERE",
+        "PUT ANOTHER ONE HERE",
+        "REMEMBER QUOTATION MARKS AND COMMAS"
     ]
 }
