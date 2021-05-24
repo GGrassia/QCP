@@ -90,7 +90,10 @@ namespace QCP
                 }
                 else
                 {
-                    File.Delete(launchAgentsFolder);
+                    if (File.Exists(launchAgentsFolder))
+                    {
+                        File.Delete(launchAgentsFolder);
+                    }
                 }
             }
         }
