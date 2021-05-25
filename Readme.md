@@ -112,7 +112,8 @@ Here's a simple solution to the problem.
 
 - ***You could skip editing the startup json, but it would mean you have to press some buttons, and insert a path manually EVERY TIME, you don't want that, do you?***
 
-Well then, in the `"DefaultFolder"` field there should be some text, delete it and put the path of the folder you want to keep tidy. Since version 1.1 you can add multiple folders to be tidied, just remember to separate the paths with a comma `","`.
+Well then, in the `"DefaultFolder"` field there should be some text, delete it and put the path of the folder you want to keep tidy. Since version 1.1 you can add multiple folders to be tidied, just remember to separate the paths with a comma `","`.  
+**If you are on windows, substitute this `\` with this `/` in your paths, or QCP won't work!**
 
 ![Startup Json](/images/StartupJson.png)
 
@@ -157,7 +158,8 @@ Blocks have the following fields:
 2. `"Extensions"`: these are the extensions linked to the filetypes. If you want to move, add or remove an extension, **make sure** you don't leave double commas or spaces in the file.  
 If you want pdfs with pictures and not text documents, editing this file you can.
 
-3. `"Folder"`: here you can put the custom path for a filetype group. QCP won't make a new folder if you have given it a valid custom path (checks if the folder exists to know it), but will just move the files there.
+3. `"Folder"`: here you can put the custom path for a filetype group. QCP won't make a new folder if you have given it a valid custom path (checks if the folder exists to know it), but will just move the files there.  
+**If you are on windows, substitute this `\` with this `/` in your paths, or QCP won't work!**
 
 > If `Folder` is not "null", QCP will make a custom folder with the `Folder` field as it's name, you have been warned!
 

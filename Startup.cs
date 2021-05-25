@@ -71,7 +71,7 @@ namespace QCP
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                string launchAgentsFolder = "~/Library/LaunchAgents/QCP.plist";
+                string launchAgentsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Library/LaunchAgents/com.QCP.plist");
                 string runFolder = AppDomain.CurrentDomain.BaseDirectory;
                 if (x.LaunchAtLogin)
                 {
@@ -82,7 +82,7 @@ namespace QCP
 
                     NSDictionary root = new NSDictionary();
                     NSString plistID = new NSString("QCP");
-                    NSString programPath = new NSString(Path.Combine(runFolder, "QCP", "QCP"));
+                    NSString programPath = new NSString(Path.Combine(runFolder, "QCP"));
                     root.Add("Label", plistID);
                     root.Add("Program", programPath);
                     root.Add("RunAtLoad", true);
