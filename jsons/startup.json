@@ -1,0 +1,12 @@
+{
+    "SilentMode": false,
+    "LaunchAtLogin": false,
+    "SlowMode": true,
+    "SettingsJson": "defaultSettings.json",
+    "DefaultFolder": 
+    [
+        "PUT A FOLDER PATH HERE",
+        "PUT ANOTHER ONE HERE, YOU CAN ADD OR REMOVE FOLDERS",
+        "JUST WRITE THE PATHS BETWEEN QUOTATION MARKS AND SEPARATE THEM WITH COMMAS"
+    ]
+}

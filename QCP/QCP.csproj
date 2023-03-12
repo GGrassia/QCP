@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="jsons/defaultSettings.json" CopyToPublishDirectory="PreserveNewest" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="jsons/startup.json" CopyToPublishDirectory="PreserveNewest" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Win32.Registry" Version="6.0.0-preview.5.21301.5" />
+    <PackageReference Include="plist-cil" Version="2.2.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.435">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

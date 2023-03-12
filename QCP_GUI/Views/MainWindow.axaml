@@ -1,0 +1,60 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:QCP_GUI.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:av="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls;"
+        xmlns:data="clr-namespace:Avalonia.Data;assembly=Avalonia;"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="QCP_GUI.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="QCP_GUI">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    <TabControl>
+        <TabItem>
+            <TabItem.Header>
+                Settings
+            </TabItem.Header>
+			<StackPanel>
+				<TextBlock>Hi! Here you will be able to make some adjustments</TextBlock>
+				<CheckBox IsChecked="{Binding Startup.SilentMode}">Silent Mode</CheckBox>
+				<CheckBox IsChecked="{Binding Startup.LaunchAtLogin}">Launch at Login</CheckBox>
+				<CheckBox IsChecked="{Binding Startup.SlowMode}">Slow mode</CheckBox>
+			</StackPanel>	
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>Folders</TabItem.Header>
+			<StackPanel>
+				<TextBlock>Here you will be able to select the folders you want tidied up!</TextBlock>
+				<Grid>
+					<DataGrid Name="Folders"
+							  HeadersVisibility="All"
+							  Items="{Binding Startup.DefaultFolder}"
+							  Background="DarkBlue"
+							  AutoGenerateColumns="True" 
+							  AlternatingRowBackground="DarkGray" 
+							  CanUserSortColumns="True">
+					<!--<DataGrid.Columns>
+						<DataGridColumn Header="Path" Binding="{Binding}" />
+					</DataGrid.Columns>-->
+				    </DataGrid>
+				</Grid>
+			</StackPanel>
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                File Types (Advanced)
+            </TabItem.Header>
+            <TextBlock Background="DarkRed">Here you can customize file types and corresponding folders! Still Work in progress</TextBlock>
+        </TabItem>
+    </TabControl>
+    <!--
+    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    -->
+
+</Window>
