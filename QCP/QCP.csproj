@@ -5,9 +5,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
+
   <ItemGroup>
-    <None Include="jsons/defaultSettings.json" CopyToPublishDirectory="PreserveNewest" CopyToOutputDirectory="PreserveNewest" />
-    <None Include="jsons/startup.json" CopyToPublishDirectory="PreserveNewest" CopyToOutputDirectory="PreserveNewest" />
+    <Compile Remove="jsons\**" />
+    <EmbeddedResource Remove="jsons\**" />
+    <None Remove="jsons\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Win32.Registry" Version="6.0.0-preview.5.21301.5" />
