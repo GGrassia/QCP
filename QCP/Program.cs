@@ -14,7 +14,7 @@
         public static void Main(string[] args)
         {
             // Creating a startup object with the basic settings of the program and see if user wants to use defaults.
-            Startup startup = JsonSerializer.Deserialize<Startup>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\", "jsons", "startup.json")));
+            Startup startup = JsonSerializer.Deserialize<Startup>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\", "jsons", "startup.json")));
             bool defaults = Startup.UseDefaults(startup);
 
             List<Correlation> startAndEndPaths = Startup.LoadSettings(defaults, startup);

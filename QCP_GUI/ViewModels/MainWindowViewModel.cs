@@ -9,7 +9,7 @@ namespace QCP_GUI.ViewModels
     {
         public string Greeting => "Welcome to Avalonia!";
 
-        public Startup Startup => JsonSerializer.Deserialize<Startup>(File.ReadAllText(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,@"..\..\..\..\","QCP", "jsons", "startup.json"))));
+        public Startup Startup => JsonSerializer.Deserialize<Startup>(File.ReadAllText(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,@"..\..\..\..\", "jsons", "startup.json"))));
 
     }
 }

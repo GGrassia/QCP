@@ -102,11 +102,11 @@ namespace QCP
         {
             if (usingDefaults)
             {
-                return JsonSerializer.Deserialize<List<Correlation>>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "jsons", settings.SettingsJson)));
+                return JsonSerializer.Deserialize<List<Correlation>>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\", "jsons", settings.SettingsJson)));
             }
             else
             {
-                return JsonSerializer.Deserialize<List<Correlation>>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "jsons", "defaultSettings.json")));
+                return JsonSerializer.Deserialize<List<Correlation>>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\", "jsons", "defaultSettings.json")));
             }
         }
 
